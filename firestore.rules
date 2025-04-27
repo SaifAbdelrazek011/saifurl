@@ -1,0 +1,10 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Allow anyone to read short URLs (public access)
+    match /urls/{shortCode} {
+      allow read: if true;  // Allow anyone to access the short URLs
+      allow create: if request.auth != null;  // Allow authenticated users to create short URLs
+    }
+  }
+}
