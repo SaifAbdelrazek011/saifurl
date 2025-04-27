@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>URL Shortener</title>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+</head>
+<body>
+  <h1>URL Shortener</h1>
+  <form id="urlForm">
+    <input type="text" id="longUrl" placeholder="Enter long URL" required />
+    <button type="submit">Shorten URL</button>
+  </form>
+
+  <p>Short URL: <span id="shortUrl"></span></p>
+
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "your-api-key",
+      authDomain: "your-project-id.firebaseapp.com",
+      projectId: "your-project-id",
+      storageBucket: "your-project-id.appspot.com",
+      messagingSenderId: "your-messaging-sender-id",
+      appId: "your-app-id"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore(app);
+
+    // Function to shorten the URL
+    document.getElementById("urlForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const longUrl = document.getElementById("longUrl").value;
+
+      // Generate a short code (you can create your own unique code)
+      const shortCode = Math.random().toString(36).substring(2, 8);
+
+      // Add the URL to Firestore
+      await db.collection("urls").doc(shortCode).set({
+        longUrl: longUrl,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      // Display the short URL
+      const shortUrl = `https://your-domain.com/${shortCode}`;
+      document.getElementById("shortUrl").textContent = shortUrl;
+    });
+  </script>
+</body>
+</html>
