@@ -27,11 +27,35 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/shortUrls", async (req, res) => {
-  if (req.body.token !== accessToken) {
+  const { fullUrl, token, customShortUrl } = req.body;
+
+  // Check if the token is valid
+  if (token !== accessToken) {
     return res.status(403).send("Forbidden: Invalid access token");
   }
 
-  await ShortUrl.create({ full: req.body.fullUrl });
+  // If a custom short URL is provided, use it, else generate a new one
+  let shortUrl = customShortUrl || nanoid(7); // Generate a short URL if none is provided
+
+  // Ensure the custom short URL is unique
+  const existingUrl = await ShortUrl.findOne({ short: shortUrl });
+  if (existingUrl) {
+    return res.status(400).send("Custom short URL already exists.");
+  }
+
+  if (!fullUrl) {
+    return res.status(400).send("Full URL is required.");
+  }
+
+  const existingFullUrl = await ShortUrl.findOne({ full: fullUrl });
+  if (existingFullUrl) {
+    return res
+      .status(400)
+      .send("Full URL already exists at /" + existingFullUrl.short);
+  }
+
+  // Create and save the new short URL
+  await ShortUrl.create({ full: fullUrl, short: shortUrl });
 
   res.redirect("/");
 });
