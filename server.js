@@ -15,6 +15,9 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Failed to connect to MongoDB", err));
 
+// Access token from environment variable
+const accessToken = process.env.ACCESS_TOKEN;
+
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 
@@ -24,6 +27,10 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/shortUrls", async (req, res) => {
+  if (req.body.token !== accessToken) {
+    return res.status(403).send("Forbidden: Invalid access token");
+  }
+
   await ShortUrl.create({ full: req.body.fullUrl });
 
   res.redirect("/");
