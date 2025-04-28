@@ -7,60 +7,11 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
     />
-    <title>Document</title>
+    <title>SaifURL</title>
   </head>
   <body>
     <div class="container">
       <h1 class="text-center">Saif URLs</h1>
-
-      <form action="/shortUrls" method="POST" class="my-4">
-        <div class="row">
-          <!-- Full URL -->
-          <div class="col-md-4">
-            <label for="fullUrl" class="form-label">Full URL</label>
-            <input
-              required
-              placeholder="Url"
-              type="url"
-              name="fullUrl"
-              id="fullUrl"
-              class="form-control"
-            />
-          </div>
-
-          <!-- Access Token -->
-          <div class="col-md-3">
-            <label for="token" class="form-label">Access Token</label>
-            <input
-              required
-              type="text"
-              name="token"
-              id="token"
-              placeholder="Enter Access Token"
-              class="form-control"
-            />
-          </div>
-
-          <!-- Custom Short URL -->
-          <div class="col-md-3">
-            <label for="customShortUrl" class="form-label"
-              >Custom Short URL</label
-            >
-            <input
-              type="text"
-              name="customShortUrl"
-              id="customShortUrl"
-              placeholder="Custom short URL"
-              class="form-control"
-            />
-          </div>
-
-          <!-- Submit Button -->
-          <div class="col-md-2">
-            <button class="btn btn-success mt-4" type="submit">Short</button>
-          </div>
-        </div>
-      </form>
 
       <table class="table table-striped table-responsive">
         <thead>

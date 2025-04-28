@@ -26,6 +26,16 @@ app.get("/", async (req, res) => {
   res.render("index", { shortUrls: shortUrls });
 });
 
+app.get("/new", (req, res) => {
+  const token = req.query.token;
+
+  if (token !== accessToken) {
+    return res.status(403).send("Forbidden: Invalid access token");
+  }
+
+  res.render("new", { token });
+});
+
 app.post("/shortUrls", async (req, res) => {
   const { fullUrl, token, customShortUrl } = req.body;
 
