@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+    />
+    <title>SaifURL</title>
+  </head>
+  <body class="bg-light">
+    <div class="container py-5">
+      <h1 class="text-center mb-4 fw-bold text-primary">Saif URLs Viewer</h1>
+
+      <div class="table-responsive shadow-sm rounded bg-white p-4">
+        <table class="table table-striped table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Full URL</th>
+              <th>Short URL</th>
+              <th>Clicks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% shortUrls.forEach(shortUrl => { %>
+            <tr>
+              <td>
+                <a
+                  href="<%= shortUrl.full %>"
+                  target="_blank"
+                  class="text-decoration-none text-primary fw-bold"
+                  ><%= shortUrl.full %></a
+                >
+              </td>
+              <td>
+                <a
+                  href="<%= shortUrl.short %>"
+                  target="_blank"
+                  class="text-decoration-none text-success fw-bold"
+                  ><%= shortUrl.short %></a
+                >
+              </td>
+              <td class="text-center fw-bold"><%= shortUrl.clicks %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
