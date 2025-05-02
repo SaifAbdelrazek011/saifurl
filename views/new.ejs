@@ -9,55 +9,60 @@
     />
     <title>new SaifURL</title>
   </head>
-  <body>
-    <form action="/shortUrls" method="POST" class="my-4">
-      <div class="row">
-        <!-- Full URL -->
-        <div class="col-md-4">
-          <label for="fullUrl" class="form-label">Full URL</label>
-          <input
-            required
-            placeholder="Url"
-            type="url"
-            name="fullUrl"
-            id="fullUrl"
-            class="form-control"
-          />
-        </div>
+  <body class="bg-light">
+    <div class="container py-5">
+      <form
+        action="/shortUrls"
+        method="POST"
+        class="my-4 p-4 bg-white shadow rounded"
+      >
+        <div class="row g-3">
+          <!-- Full URL -->
+          <div class="col-md-4">
+            <label for="fullUrl" class="form-label fw-bold">Full URL</label>
+            <input
+              required
+              placeholder="Url"
+              type="url"
+              name="fullUrl"
+              id="fullUrl"
+              class="form-control border-secondary"
+            />
+          </div>
 
-        <!-- Access Token -->
-        <div class="col-md-3">
-          <label for="token" hidden class="form-label">Access Token</label>
-          <input
-            required
-            type="hidden"
-            name="token"
-            id="token"
-            value="<%= token %>"
-            placeholder="Enter Access Token"
-            class="form-control"
-          />
-        </div>
+          <!-- Access Token -->
+          <div class="col-md-3">
+            <input
+              required
+              type="hidden"
+              name="token"
+              id="token"
+              value="<%= token %>"
+              placeholder="Enter Access Token"
+              class="form-control"
+            />
+          </div>
 
-        <!-- Custom Short URL -->
-        <div class="col-md-3">
-          <label for="customShortUrl" class="form-label"
-            >Custom Short URL</label
-          >
-          <input
-            type="text"
-            name="customShortUrl"
-            id="customShortUrl"
-            placeholder="Custom short URL"
-            class="form-control"
-          />
-        </div>
+          <!-- Custom Short URL -->
+          <div class="col-md-3">
+            <label for="customShortUrl" class="form-label fw-bold"
+              >Custom Short URL</label
+            >
+            <input
+              type="text"
+              name="customShortUrl"
+              id="customShortUrl"
+              placeholder="Custom short URL"
+              class="form-control border-secondary"
+            />
+          </div>
 
-        <!-- Submit Button -->
-        <div class="col-md-2">
-          <button class="btn btn-success mt-4" type="submit">Short</button>
+          <!-- Submit Button -->
+          <div class="col-md-2 d-flex align-items-end">
+            <button class="btn btn-success w-100" type="submit">Short</button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </body>
 </html>

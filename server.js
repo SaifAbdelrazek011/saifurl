@@ -39,6 +39,8 @@ app.get("/new", (req, res) => {
 app.post("/shortUrls", async (req, res) => {
   const { fullUrl, token, customShortUrl } = req.body;
 
+  const domain = req.protocol + "://" + req.headers.host;
+
   // Check if the token is valid
   if (token !== accessToken) {
     return res.status(403).send("Forbidden: Invalid access token");
@@ -61,7 +63,9 @@ app.post("/shortUrls", async (req, res) => {
   if (existingFullUrl) {
     return res
       .status(400)
-      .send("Full URL already exists at /" + existingFullUrl.short);
+      .send(
+        `Full URL already exists at <a href="${domain}/${existingFullUrl.short}">${domain}/${existingFullUrl.short}</a>`
+      );
   }
 
   // Create and save the new short URL
