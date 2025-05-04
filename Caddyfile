@@ -1,0 +1,11 @@
+localhost
+
+reverse_proxy 127.0.0.1:3000 {
+  health_uri /
+  fail_duration 10s
+}
+
+log {
+  output file caddy.log
+  level INFO
+}
